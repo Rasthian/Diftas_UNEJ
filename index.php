@@ -1,3 +1,3 @@
 <?php
-//include 'controller/main.php';
+include 'controller/main.php';
 ?>
