@@ -36,9 +36,8 @@
 </head>
 
 <body>
-=======
     <div class="icon-image h-screen w-full md:w-2/3 bg-center font-['Poppins'] flex flex-col items-center justify-center text-white">
-        <img class="w-40" src="assets/images/Ditas_3.png" alt="">
+        <img class="w-40" src="assets/images/Diftas.png" alt="">
         <h1 class="text-5xl m-6">DIFTAS</h1>
         <p class="text-center">Discussion Forum and<br>Task Sharing</p>
     </div>
@@ -60,7 +59,6 @@
         </div>
         <a href=""><p class="flex flex-col items-center text-blue-700 mt-3">Buat akun jika belum punya</p></a>
     </div>
->>>>>>> 709b80e43d91684e12165c572310eacb3abcd221
 </body>
 
 </html>
