@@ -5,5 +5,6 @@ class DiscussController extends Controller {
     static function index() {
         view('home/homepage');
     }
+    
 }
 ?>
