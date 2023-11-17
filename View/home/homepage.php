@@ -1,6 +1,4 @@
-<?php
-require_once 'controller/controllers.php';
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,6 +53,18 @@ require_once 'controller/controllers.php';
                         <img src="assets/images/dropdown.png" alt="">
                     </div>
                 </div>
+                <a href="" class='flex justify-center items-center mt-7'>
+                    <div class='bg-white w-[900px] rounded-lg'>
+                        <div class='header m-5'>
+                            <p>SAs</p>
+                            <p>10 jam</p>
+                        </div>
+                        <div class="isi m-5">
+                            <p>Judol</p>
+                            <p>Desk</p>
+                        </div>
+                    </div>
+                </a>
             </div>
             <div class='kanan'>
                 <div class='flex justify-center'>
