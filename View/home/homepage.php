@@ -1,13 +1,10 @@
-<<<<<<< HEAD
 
-=======
 <?php
 require_once 'config/conn.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
->>>>>>> 059c445546dfd42cee99b2a98ad7f327e6e45fd2
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

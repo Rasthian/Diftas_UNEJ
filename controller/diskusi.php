@@ -1,32 +1,18 @@
 <?php
 require_once 'config/conn.php';
 require_once 'function.php';
-<<<<<<< HEAD
-<<<<<<< HEAD
 require_once 'model/DataModels.php';
-
-class DiskusiController
-{
-    public function index()
-    {
-        session_start();
-        DataModel::cookieData();
-        DataModel::sessionHomepage();
-        $username = $_SESSION['session_nim'];
-        include ('view/home/homepage.php');
-    }
-}
-=======
-=======
->>>>>>> 059c445546dfd42cee99b2a98ad7f327e6e45fd2
 require_once 'model/diskusi.php';
 require_once 'model/fakultas.php';
 
 class DiskusiController {
     public function index() {
-        view('home/homepage',[
-            'diskusi' => ModelDiskusi::getAllDiskusi()
-        ]);
+        session_start();
+        DataModel::cookieData();
+        DataModel::sessionHomepage();
+        $username = $_SESSION['session_nim'];
+        include ('view/home/homepage.php');
+        // $ISI_RIS=ModelDiskusi::getAllDiskusi();
     }
     
     public function add () {
@@ -63,7 +49,3 @@ class DiskusiController {
     }
 }
 ?>
-<<<<<<< HEAD
->>>>>>> 059c445546dfd42cee99b2a98ad7f327e6e45fd2
-=======
->>>>>>> 059c445546dfd42cee99b2a98ad7f327e6e45fd2
