@@ -1,8 +1,13 @@
 <?php
-function view($page, $data=[]) {
-    include 'view/'.$page.'.php';
+function view($page) {
+    include('view/'.$page.'.php');
 }
-
+function titleheader($string, $type, $classValues='') {
+    echo 
+    "<$type" . " class=\"$classValues\"" . ">" . 
+        $string . 
+    "</$type>";
+}
 
 
 ?>

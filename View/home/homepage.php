@@ -1,8 +1,4 @@
-<?php
-require_once 'controller/controllers.php';
-?>
-<!DOCTYPE html>
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +8,7 @@ require_once 'controller/controllers.php';
 <body>
     <header class="flex border-b-2 items-center h-[136px]">
         <div class='flex pl-5 pr-5 mx-auto w-[640px] sm:w-[640px] md:w-[760px]  lg:w-[1000px] xl:w-[1280px] 2xl:w-[1920px] md:text-2xl font-medium'>
+        <h1><?php $username ?></h1>
             <img src="assets/images/Diftas_Warna.png" class="!flex sm:!flex md:!flex lg:!fWlex xl:!flex 2xl:!flex" alt="">
             <ul class='flex w-[1930px] justify-between items-center text-neutral-800 font-[Montserrat]'>
                 <li class='hidden sm:block ml-5'><a href="<?=BASEURL?>">Diftas</a></li>
@@ -21,6 +18,7 @@ require_once 'controller/controllers.php';
     </header>
     <div class="container min-w-full bg-slate-100 pb-5 font-[Montserrat]">
         <div class='grid grid-cols-[1fr,2fr,1fr]'>
+            
             <div class='kiri border-r'>
                 <div class='flex justify-center font-medium  mt-20 '>
                     <a href="<?= BASEURL ?>">
