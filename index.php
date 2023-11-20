@@ -4,18 +4,21 @@ require_once 'config/config.php';
 require_once 'controller/diskusi.php';
 require_once 'controller/login.php';
 
-$action = isset($_GET['action']) ? $_GET['action'] : 'index';
+$action = isset($_GET['action']) ? $_GET['action'] : '';
 
 $diskusiController = new DiskusiController();
 $loginController = new LoginController();
 
+// Memanggil action yang sesuai
 switch ($action) {
     case 'login':
         $loginController->index();
-        break;  // Pastikan untuk menambahkan break di sini
-
+        break;
+    case 'add-diskusi':
+        $diskusiController->add();
+        break;
     default:
         $diskusiController->index();
-        break;  // Dan juga di sini
+        break;
 }
 ?>
