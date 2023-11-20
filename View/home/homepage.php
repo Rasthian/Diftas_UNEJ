@@ -1,3 +1,6 @@
+<?php
+require_once 'config/conn.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,6 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready
+    </script>
 </head>
 <body>
     <header class="flex border-b-2 items-center h-[136px]">
@@ -39,7 +46,7 @@
             </div>
             <div class='tengah border-r '>
                 <div class='flex justify-center mt-10'>
-                    <a href="">
+                    <a href="index.php?action=add-diskusi">
                         <div class=' w-[900px] h-[80px] bg-white rounded-lg flex items-center justify-center border  '>
                             <div class='bg-slate-100 w-[880px] flex items-center justify-start rounded-lg'>
                                 <p class=' text-neutral-400 font-medium py-5 rounded p-5'>Apa yang ingin anda diskusikan?</p> 
@@ -48,38 +55,50 @@
                     </a>
                 </div>
                 <div class='mt-7 flex justify-end mr-7 '>
-                    <div class=' w-[200px] h-[60px] bg-white rounded-lg flex items-center justify-evenly border hover:bg-slate-200 '>
-                        <p>Fakultas</p>
-                        <img src="assets/images/dropdown.png" alt="">
+                    <div class=' w-[200px] h-[60px] bg-white rounded-lg flex items-center justify-evenly border'>
+                        <select name="" id="fakultasDropdown">
+                            <option value="">Fakultas</option>
+                            <?php foreach ($fakultasList as $fakultas): ?>
+                                <option value="<?= $fakultas['id'] ?>"><?$fakultas['nama'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
                     </div>
                 </div>
-                <a href="" class='flex justify-center items-center mt-7'>
+                <?php foreach ($diskusis = ModelDiskusi::getAllDiskusi() as $diskusi): ?>
+                <a href="index.php?action=diskusi&id=<?= $diskusi['id'];?>" class='flex justify-center items-center mt-7'>
                     <div class='bg-white w-[900px] rounded-lg'>
                         <div class='header m-5'>
-                            <p>SAs</p>
-                            <p>10 jam</p>
+                            <p class='text-neutral-800 text-xl font-medium'><?= $diskusi['nama']?></p>
+                            <p class='text-neutral-800 text-xl font-normal'><?= $diskusi['waktu_pembuatan']?></p>
                         </div>
                         <div class="isi m-5">
-                            <p>Judol</p>
-                            <p>Desk</p>
+                            <p class='text-neutral-800 text-xl font-bold'><?= $diskusi['judul']?></p>
+                            <p class='text-neutral-800 text-xl font-normal'><?= $diskusi['isi']?></p>
                         </div>
                     </div>
                 </a>
+                <?php endforeach ;?>
             </div>
             <div class='kanan'>
-                <div class='flex justify-center'>
-                    <img src="assets/images/Diftas_Warna.png" alt="">
+                <div class='flex justify-center font-medium  mt-20 '>
                     <a href="<?= BASEURL ?>">
-                        <p>Diskusi</p>
+                        <img src="assets/images/diskusku.png" alt="">
                     </a>
-                </div>
-                <div>
-                    <a href="tugas">
-                        <p>Tugas</p>
+                    <a href="<?= BASEURL ?>" class="flex self-center ml-3">
+                        <p class="text-netural-800">DiskusKu</p>
                     </a>
                 </div>
             </div>
         </div>
     </div>
+    <?php include '../footer.php'; ?>
+    <script>
+    $(document).ready(function () {
+        $('#fakultasDropdown').change(function () {
+            var selectedFakultas = $(this).val();
+            window.location.href = 'index.php?action=filter_diskusi&fakultas=' + selectedFakultas;
+        });
+    });
+    </script>
 </body>
 </html>
