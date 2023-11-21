@@ -17,7 +17,6 @@ require_once 'config/conn.php';
 <body>
     <header class="flex border-b-2 items-center h-[136px]">
         <div class='flex pl-5 pr-5 mx-auto w-[640px] sm:w-[640px] md:w-[760px]  lg:w-[1000px] xl:w-[1280px] 2xl:w-[1920px] md:text-2xl font-medium'>
-
             <img src="assets/images/Diftas_Warna.png" class="!flex sm:!flex md:!flex lg:!fWlex xl:!flex 2xl:!flex" alt="">
             <ul class='flex w-[1930px] justify-between items-center text-neutral-800 font-[Montserrat]'>
                 <li class='hidden sm:block ml-5'><a href="<?=BASEURL?>">Diftas</a></li>

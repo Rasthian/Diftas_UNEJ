@@ -12,6 +12,9 @@ class DiskusiController {
     }
     
     public function add () {
+        session_start();
+        auth::sessionProgram();
+        auth::cookieData();
         view('home/subview/add');
     }
     public function filterDiskusi() { 
@@ -28,20 +31,8 @@ class DiskusiController {
     }
 
     public static function createDiskusi($judul, $isi, $user_fk) {
-        global $conn;
-
-        // Waktu Pembuatan (otomatis mengambil yyyy, mm, dd)
-        $waktu_pembuatan = date('Y-m-d H:i:s');
-
-        // Insert data ke dalam tabel diskusi
-        $sql = "INSERT INTO diskusi (judul, isi, waktu_pembuatan, user_fk) 
-                VALUES ('$judul', '$isi', '$waktu_pembuatan', '$user_fk')";
-
-        if ($conn->query($sql) === TRUE) {
-            return true;
-        } else {
-            return false;
-        }
+        session_start();
+        auth::sessionProgram();
     }
 }
 ?>

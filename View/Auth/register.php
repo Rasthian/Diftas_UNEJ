@@ -26,26 +26,17 @@
         .form-container {
             flex: 1;
         }
+
+        #dropdown-menu {
+            max-height: 300px;
+            overflow-y: auto;
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var passwordInput = document.getElementsByName('password')[0];
-            var confirmPasswordInput = document.getElementsByName('konfirmasi-password')[0];
-
-            function validatePassword() {
-                if (passwordInput.value !== confirmPasswordInput.value) {
-                    confirmPasswordInput.setCustomValidity('Konfirmasi password harus sama dengan password');
-                } else {
-                    confirmPasswordInput.setCustomValidity('');
-                }
-            }
-
-            passwordInput.addEventListener('input', validatePassword);
-            confirmPasswordInput.addEventListener('input', validatePassword);
-        });
-        document.addEventListener('DOMContentLoaded', function() {
             const button = document.getElementById('dropdown-button');
             const menu = document.getElementById('dropdown-menu');
+            const selectedProdiInput = document.getElementById('selectedProdi');
 
             button.addEventListener('click', function() {
                 menu.classList.toggle('hidden');
@@ -58,12 +49,25 @@
                     menu.classList.add('hidden');
                 }
             });
+
+            // Update the selectedProdi value and ID when an option is clicked
+            const dropdownOptions = document.querySelectorAll('#dropdown-menu a');
+            dropdownOptions.forEach(function(option) {
+                option.addEventListener('click', function() {
+                    const prodiID = option.dataset.prodiid;
+                    const prodiName = option.textContent;
+
+                    selectedProdiInput.value = prodiID;
+                    button.textContent = 'Prodi: ' + prodiName;
+                    menu.classList.add('hidden');
+                });
+            });
         });
     </script>
 
 
 </head>
-<form action="" class="w-full h-full flex justify-center">
+<form action="?action=registerProcess" class="w-full h-full flex justify-center" method="post" role="form">
     <div class="form-container h-screen w-full md:w-1/2 p-8">
         <h1 class="mt-4 text-3xl font-bold text-blue-400 text-center">Register</h1>
         <div class="all-form">
@@ -85,7 +89,7 @@
             </div>
             <div class="mt-2 flex flex-col ml-5 mr-5 lg:ml-96 lg:mr-96">
                 <label class="font-bold text-blue-700" for="Password">Confirm Password</label>
-                <input name="konfirmasi-password" class="outline-none w-full h-10 bg-slate-100 rounded-sm mt-2" type="password" placeholder="Masukkan Konfirmasi Password">
+                <input name="confirmasiPassword" class="outline-none w-full h-10 bg-slate-100 rounded-sm mt-2" type="password" placeholder="Masukkan Konfirmasi Password">
             </div>
             <div class="relative inline-block text-left ml-5 mr-5 lg:ml-96 lg:mr-96 mt-10">
                 <button id="dropdown-button" type="button" class="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:bg-gray-200">
@@ -96,19 +100,32 @@
                 </button>
                 <div id="dropdown-menu" class="absolute right-0 hidden w-40 mt-2 bg-white border border-gray-300 rounded-md shadow-lg">
                     <div class="py-1">
-                        <a class="block px-4 py-2 text-sm text-gray-700 no-hover">Ilmu Komputer</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Teknologi Informasi</a>
+                        <?php
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $prodiID = $row['id'];
+                            $prodiName = $row['nama'];
+                            echo "<a data-prodiid='$prodiID' class='block px-4 py-2 text-sm text-gray-700 no-hover' href='#'>$prodiName</a>";
+                        }
+                        ?>
                     </div>
+                    <input type="hidden" name="prodi" id="selectedProdi" value="">
                 </div>
             </div>
             <div class="flex flex-col items-center mt-7 ml-5 mr-5 lg:ml-96 lg:mr-96">
                 <button class="w-full md:w-full h-10 bg-blue-400 text-white font-bold" type="submit">Register</button>
             </div>
         </div>
-        <a href="?action=index">
+        <?php if(!empty($err)){ ?>
+            <div id="register-alert" class="alert flex items-center justify-center mt-8 mb-5 text-red-500">
+            <?php echo $err; ?>
+            </div>
+            <?php }?>   
+        <a href="?action=login">
             <p class="flex flex-col items-center text-blue-700 mt-3">Log in jika telah ada akun</p>
         </a>
     </div>
+</form>
+
 <body>
 
 </body>
