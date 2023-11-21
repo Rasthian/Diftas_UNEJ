@@ -39,12 +39,12 @@ class auth
             return $err;
             exit;
         }       
-        
+        $id = $r1['id'];
         if(empty($err)){
-            $_SESSION['session_nim'] = $nim; //server
+            $_SESSION['session_id'] = $id; //server
             $_SESSION['session_password'] = md5($password);
-            $cookie_name = "cookie_nim";
-            $cookie_value = $nim;
+            $cookie_name = "cookie_user";
+            $cookie_value = $id;
             $cookie_time = time() + (60 * 60 * 24 * 30);
             setcookie($cookie_name,$cookie_value,$cookie_time,"/");
             $cookie_name = "cookie_password";
@@ -55,28 +55,27 @@ class auth
         return $err;
     }
     public static function sessionData(){
-        if(isset($_SESSION['session_nim'])){
+        if(isset($_SESSION['session_id'])){
             header("location:?action=homepage");
             exit();
         }
     }
     public static function sessionProgram(){
-        if(!isset($_SESSION['session_nim'])){
+        if(!isset($_SESSION['session_id'])){
             header("location:?action=login");
             exit(); 
         }
     }
     public static function cookieData(){
         global $conn;
-        if(isset($_COOKIE['cookie_nim'])){
-            $cookie_nim = $_COOKIE['cookie_nim'];
+        if(isset($_COOKIE['cookie_user'])){
+            $cookie_user = $_COOKIE['cookie_user'];
             $cookie_password = $_COOKIE['cookie_password'];
-        
-            $sql1 = "select * from user where nim = '$cookie_nim'";
+            $sql1 = "select * from user where id = '$cookie_user'";
             $q1   = mysqli_query($conn,$sql1);
             $r1   = mysqli_fetch_array($q1);
             if($r1['password'] == $cookie_password){
-                $_SESSION['session_nim'] = $cookie_nim;
+                $_SESSION['session_id'] = $cookie_user;
                 $_SESSION['session_password'] = $cookie_password;
             }
         }

@@ -11,6 +11,7 @@ class authController {
         error_reporting(E_ERROR | E_PARSE);
         session_start();
         auth::sessionData();
+        auth::cookieData();
         $nim   = $_POST['nim'];
         $password   = $_POST['password'];
         if(empty($nim) and empty($password)){
