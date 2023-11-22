@@ -54,6 +54,7 @@ class auth
         }
         return $err;
     }
+
     public static function sessionData(){
         if(isset($_SESSION['session_id'])){
             header("location:?action=homepage");
@@ -66,7 +67,7 @@ class auth
             exit(); 
         }
     }
-    public static function cookieData(){
+     public static function cookieData(){
         global $conn;
         if(isset($_COOKIE['cookie_user'])){
             $cookie_user = $_COOKIE['cookie_user'];

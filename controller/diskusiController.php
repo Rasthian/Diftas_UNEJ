@@ -6,28 +6,47 @@ require_once 'model/fakultas.php';
 
 class DiskusiController {
     public function index() {
-        view('home/homepage',[
-            'diskusi' => ModelDiskusi::getAllDiskusi()
-        ]);
+        $result = ModelDiskusi::getAllFakultas();
+        $diskusi = ModelDiskusi::getAllDiskusi();
+        include ('view/home/homepage.php');
+    }
+    public function diskusiku() {
+        session_start();
+        auth::sessionProgram();
+        auth::cookieData();
+        $result = ModelDiskusi::getAllFakultas();
+        $diskusi = ModelDiskusi::getAllDiskusiku();
+        include ('view/home/homepage.php');
     }
     
     public function add () {
         session_start();
         auth::sessionProgram();
         auth::cookieData();
-        view('home/subview/add');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $judul = $_POST['judul'];
+            $isi = $_POST['isi'];
+            $err = '';
+            $result = ModelDiskusi::addDiskusi($judul, $isi);
+            if ($result) {
+                header("Location: ?action=homepage");
+                exit();
+            } else {
+                // Tampilkan pesan error
+                $err = "Gagal menambahkan diskusi. Silakan coba lagi.";
+            }
+        }
+        include 'view/home/subview/add.php';
     }
     public function filterDiskusi() { 
-        $fakultasId = $_GET['fakultas'] ?? null;
-        if ($fakultasId) {
-            $diskusi = ModelDiskusi::getFakultas($fakultasId);
-        } else {
-            $diskusi = ModelDiskusi::getAllDiskusi();
+        $fakultasID = $_POST['fakultas'];
+        if(empty($fakultasID)){
+            header('location:?action=index');
         }
-        $fakultasList = ModelFakultas::getAllFakultas();;
-        view('home/homepage', [
-            ''=> $diskusi
-        ]);
+        $result = ModelDiskusi::getAllFakultas();
+        $fakultas= ModelDiskusi::selectedFakultas($fakultasID);
+        $diskusi = ModelDiskusi::filterFakultas($fakultasID);
+        include ('view/home/homepage.php');
     }
 
     public static function createDiskusi($judul, $isi, $user_fk) {

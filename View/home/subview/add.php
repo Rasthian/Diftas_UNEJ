@@ -1,5 +1,6 @@
 <?php
 require_once 'config/conn.php';
+require_once 'controller/diskusiController.php';
 ?>
 
 <!DOCTYPE html>
@@ -45,26 +46,18 @@ require_once 'config/conn.php';
                 </div>
             </div>
             <div class='tengah border-r  flex justify-center mt-20 '>
-                <form action="post">
+                <form action="?action=add-diskusi" method="post">
                     <div class=' w-[900px] bg-white rounded-lg border border-blue-400'>
-                            <div class='m-5 flex flex-col '>
-                                <label for="judul" class='text-neutral-800 text-4xl font-medium]'>Judul Diskusi</label>
-                                <input type="text" name='judul' class=" h-[60px] bg-slate-100 rounded-[5px] p-2 mt-3" placeholder="Apa yang ingin di diskusikan?" required > 
-                                <label for="judul" class='text-neutral-800 text-4xl font-medium] mt-5'>Isi Diskusi</label>
-                                <textarea type="text" name='isi' class=" bg-slate-100 rounded-[5px] p-2 mt-3" placeholder="Apa yang ingin di diskusikan?" required ></textarea>
-                                <div class=' w-[200px] h-[60px] bg-white rounded-lg flex items-center justify-evenly border mt-5 mb-5'>
-                                    <select name="" id="fakultasDropdown">
-                                    <option value="">Fakultas</option>
-                                    <?php foreach ($fakultasList as $fakultas): ?>
-                                        <option value="<?= $fakultas['id'] ?>"><?$fakultas['nama'] ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                                <input type="submit" value='Posting' class='border rounded-lg h-16 bg-blue-400 text-white text-2xl font-medium'>
-                            </div>
-                            
+                        <div class='m-5 flex flex-col '>
+                            <label for="judul" class='text-neutral-800 text-4xl font-medium]'>Judul Diskusi</label>
+                            <input type="text" name='judul' class=" h-[60px] bg-slate-100 rounded-[5px] p-2 mt-3" placeholder="Apa yang ingin di diskusikan?" required > 
+                            <label for="judul" class='text-neutral-800 text-4xl font-medium] mt-5'>Isi Diskusi</label>
+                            <textarea type="text" name='isi' class=" bg-slate-100 rounded-[5px] p-2 mt-3" placeholder="Apa yang ingin di diskusikan?" required ></textarea>
+                            <input type="submit" value='Posting' class='border rounded-lg h-16 bg-blue-400 mt-5 text-white text-2xl font-medium'>
+                        </div>
                     </div>
-                </form>  
+                </form> 
+            </div> 
         </div>
     </div>
 </body>

@@ -4,6 +4,7 @@ require_once 'function.php';
 require_once('Model/authModels.php');
 class authController {
     public function index() {
+        
         view('auth/login');
     }
     public function login() 
@@ -11,7 +12,6 @@ class authController {
         error_reporting(E_ERROR | E_PARSE);
         session_start();
         auth::sessionData();
-        auth::cookieData();
         $nim   = $_POST['nim'];
         $password   = $_POST['password'];
         if(empty($nim) and empty($password)){
