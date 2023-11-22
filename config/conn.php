@@ -2,7 +2,7 @@
 $host = 'localhost';
 $username = 'root';
 $password = '';
-$dbname = 'projek_akhir';
+$dbname = 'forum_unej';
 
 $conn = new mysqli($host, $username, $password, $dbname);
 if ($conn->connect_error) {

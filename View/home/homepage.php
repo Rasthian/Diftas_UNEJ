@@ -20,7 +20,7 @@ require_once 'config/conn.php';
             <img src="assets/images/Diftas_Warna.png" class="!flex sm:!flex md:!flex lg:!fWlex xl:!flex 2xl:!flex" alt="">
             <ul class='flex w-[1930px] justify-between items-center text-neutral-800 font-[Montserrat]'>
                 <li class='hidden sm:block ml-5'><a href="<?=BASEURL?>">Diftas</a></li>
-                <li class='hidden sm:block'><a href="akun">Akun</a></li>
+                <li class='hidden sm:block'><a href="?action=profile">Akun</a></li>
             </ul>
         </div>
     </header>
@@ -33,14 +33,6 @@ require_once 'config/conn.php';
                     </a>
                     <a href="<?= BASEURL ?>" class="flex self-center ml-3">
                         <p class="text-blue-400">Diskusi</p>
-                    </a>
-                </div>
-                <div class='flex justify-center  mr-2 font-medium font-[Montserrat] mt-7'>
-                    <a href="tugas">
-                        <img src="assets/images/tugas_home.png" alt="">
-                    </a>
-                    <a href="tugas" class="flex self-center ml-3">
-                        <p class="text-neutral-800">Tugas</p>
                     </a>
                 </div>
             </div>
@@ -65,18 +57,21 @@ require_once 'config/conn.php';
                     </div>
                 </div>
                 <?php foreach ($diskusis = ModelDiskusi::getAllDiskusi() as $diskusi): ?>
-                <a href="index.php?action=diskusi&id=<?= $diskusi['id'];?>" class='flex justify-center items-center mt-7'>
-                    <div class='bg-white w-[900px] rounded-lg'>
-                        <div class='header m-5'>
-                            <p class='text-neutral-800 text-xl font-medium'><?= $diskusi['nama']?></p>
-                            <p class='text-neutral-800 text-xl font-normal'><?= $diskusi['waktu_pembuatan']?></p>
+                <form action="?action=show" class='flex justify-center items-center mt-7'>
+                    <button>
+                        <div class='bg-white w-[900px] rounded-lg'>
+                            <div class='header m-5'>
+                                <p class='text-neutral-800 text-xl font-medium'><?= $diskusi['nama']?></p>
+                                <p class='text-neutral-800 text-xl font-normal'><?= $diskusi['waktu_pembuatan']?></p>
+                            </div>
+                            <div class="isi m-5">
+                                <p class='text-neutral-800 text-xl font-bold'><?= $diskusi['judul']?></p>
+                                <p class='text-neutral-800 text-xl font-normal'><?= $diskusi['isi']?></p>
+                            </div>
+                            <input type="hidden" value=<?= $diskusi['id'];?>>
                         </div>
-                        <div class="isi m-5">
-                            <p class='text-neutral-800 text-xl font-bold'><?= $diskusi['judul']?></p>
-                            <p class='text-neutral-800 text-xl font-normal'><?= $diskusi['isi']?></p>
-                        </div>
-                    </div>
-                </a>
+                    </button>
+                </form>
                 <?php endforeach ;?>
             </div>
             <div class='kanan'>
@@ -91,7 +86,7 @@ require_once 'config/conn.php';
             </div>
         </div>
     </div>
-    <?php include '../footer.php'; ?>
+    //footer
     <script>
     $(document).ready(function () {
         $('#fakultasDropdown').change(function () {

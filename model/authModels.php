@@ -43,6 +43,7 @@ class auth
         if(empty($err)){
             $_SESSION['session_nim'] = $nim; //server
             $_SESSION['session_password'] = md5($password);
+            $_SESSION['session_id'] = $r1['id'];
             $cookie_name = "cookie_nim";
             $cookie_value = $nim;
             $cookie_time = time() + (60 * 60 * 24 * 30);
