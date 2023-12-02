@@ -4,12 +4,14 @@ require_once 'config/config.php';
 require_once 'controller/diskusiController.php';
 require_once 'controller/authController.php';
 require_once 'controller/profileController.php';
+require_once 'controller/adminController.php';
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 
 $diskusiController = new DiskusiController();
 $authController = new authController();
 $profileController = new profileController();
+$adminController = new adminController();
 
 // Memanggil action yang sesuai
 switch ($action) {
@@ -43,6 +45,9 @@ switch ($action) {
         break;
     case 'komentar': //Tambahkan ini
         $komentarController->add($idDiskusi);
+        break;
+    case 'admin':
+        $adminController->index();
         break;
     default:
         $diskusiController->index();
