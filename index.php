@@ -37,6 +37,13 @@ switch ($action) {
     case 'profile':
         $profileController->index();
         break;
+    case 'diskusi':
+        $idDiskusi = isset ($_GET['id']) ? $_GET['id'] : null ;
+        $diskusiController->showDiskusiId($idDiskusi);
+        break;
+    case 'komentar': //Tambahkan ini
+        $komentarController->add($idDiskusi);
+        break;
     default:
         $diskusiController->index();
         break;
