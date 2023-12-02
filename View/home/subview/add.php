@@ -12,7 +12,10 @@ require_once 'controller/diskusiController.php';
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-        $(document).ready
+        function autoExpandTextarea(element) {
+            element.style.height = "auto";
+            element.style.height = (element.scrollHeight) + "px";
+        }
     </script>
 </head>
 <body class='font-[Montserrat]'>
@@ -36,23 +39,15 @@ require_once 'controller/diskusiController.php';
                         <p class="text-blue-400">Diskusi</p>
                     </a>
                 </div>
-                <div class='flex justify-center  mr-2 font-medium mt-7'>
-                    <a href="tugas">
-                        <img src="assets/images/tugas_home_hitam.png" alt="">
-                    </a>
-                    <a href="tugas" class="flex self-center ml-3">
-                        <p class="text-neutral-800">Tugas</p>
-                    </a>
-                </div>
             </div>
             <div class='tengah border-r  flex justify-center mt-20 '>
                 <form action="?action=add-diskusi" method="post">
                     <div class=' w-[900px] bg-white rounded-lg border border-blue-400'>
-                        <div class='m-5 flex flex-col '>
+                        <div class='m-5 flex flex-col text-area'>
                             <label for="judul" class='text-neutral-800 text-4xl font-medium]'>Judul Diskusi</label>
                             <input type="text" name='judul' class=" h-[60px] bg-slate-100 rounded-[5px] p-2 mt-3" placeholder="Apa yang ingin di diskusikan?" required > 
                             <label for="judul" class='text-neutral-800 text-4xl font-medium] mt-5'>Isi Diskusi</label>
-                            <textarea type="text" name='isi' class=" bg-slate-100 rounded-[5px] p-2 mt-3" placeholder="Apa yang ingin di diskusikan?" required ></textarea>
+                            <textarea name='isi' class=" bg-slate-100 rounded-[5px] p-2 mt-3 resize-none" placeholder="Apa yang ingin di diskusikan?" required oninput="autoExpandTextarea(this)"></textarea>
                             <input type="submit" value='Posting' class='border rounded-lg h-16 bg-blue-400 mt-5 text-white text-2xl font-medium'>
                         </div>
                     </div>
