@@ -2,8 +2,11 @@
 class ModelDiskusi {
     public static function getAllDiskusi() {
         global $conn;
-        $sql = "SELECT * , u.nama FROM diskusi as d
-                JOIN user AS u on d.user_fk = u.id ";
+        $sql = "SELECT d.id as dis_id , d.judul , d.isi , d.waktu_pembuatan , d.user_fk , u.nama , f.nama as f_nama FROM diskusi as d
+                JOIN user AS u on d.user_fk = u.id 
+                JOIN prodi as p ON u.prodi_fk = p.id 
+                JOIN fakultas as f ON p.fakultas_fk = f.id
+                ORDER BY RAND()";
         $result = $conn->query($sql);
         $diskusi = [];
         if ($result->num_rows > 0) {
@@ -11,7 +14,6 @@ class ModelDiskusi {
                 $diskusi[] = $row;
             }
         }
-
         return $diskusi;
     }
 
@@ -36,11 +38,38 @@ class ModelDiskusi {
     }
 
 
-    public static function showDiskusi ($id) {
-    global $conn;
-    $sql = "SELECT * FROM  diskusi
-            JOIN ";
+    public static function getDiskusiById ($id) {
+        global $conn;
+
+        $sql = "SELECT * , u.nama ,f.nama as f_nama FROM diskusi as d
+                JOIN user AS u on d.user_fk = u.id 
+                JOIN prodi as p ON u.prodi_fk = p.id 
+                JOIN fakultas as f ON p.fakultas_fk = f.id
+                WHERE d.id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i',$id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $diskusi = $result->fetch_assoc();
+            $sql = "SELECT k.id , k.isi , k.waktu_komentar as waktu_komentar , k.user_fk , k.diskusi_fk , f.nama , u.nama as nama_komentar
+            FROM komentar as k
+            JOIN user as u ON k.user_fk = u.id 
+            JOIN prodi as p ON u.prodi_fk = p.id 
+            JOIN fakultas as f ON p.fakultas_fk = f.id 
+            WHERE k.diskusi_fk = ?";
     
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $resultKomentar = $stmt->get_result();
+
+            $diskusi['komentar'] = $resultKomentar->fetch_all(MYSQLI_ASSOC);
+
+            return $diskusi;
+        }
+
+        return null;
     }
 
     public static function addDiskusi($judul, $isi) {

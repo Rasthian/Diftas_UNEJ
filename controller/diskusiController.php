@@ -19,6 +19,27 @@ class DiskusiController {
         include ('view/home/homepage.php');
     }
     
+    public function showDiskusiId($id) {
+        session_start();
+        auth::sessionProgram();
+        auth::cookieData();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['komentar'])) {
+            $isi = $_POST['komentar'];
+            $idDiskusi = $id;
+
+            ModelKomentar::addComment($isi,$idDiskusi);
+        }
+        
+        $diskusi = ModelDiskusi::getDiskusiById($id);
+
+        if (!$diskusi) {
+            header("Location: ?action=homepage");
+            exit();
+        }
+        
+        include ('view/home/subview/show.php');
+    }
+
     public function add () {
         session_start();
         auth::sessionProgram();
