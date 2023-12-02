@@ -1,4 +1,6 @@
 <?php
+
+//controllernya gadipakai disini tapi di diskusicontroller
 require_once 'config/conn.php';
 require_once 'function.php';
 require_once 'model/komentarModels.php';
