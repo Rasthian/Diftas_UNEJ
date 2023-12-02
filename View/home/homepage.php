@@ -18,7 +18,6 @@ require_once 'config/conn.php';
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-        $(document).ready
         document.addEventListener('DOMContentLoaded', function() {
             const button = document.getElementById('dropdown-button');
             const menu = document.getElementById('dropdown-menu');
@@ -49,6 +48,19 @@ require_once 'config/conn.php';
                 });
             });
         });
+
+        function toggleReadMore(id) {
+        var content = document.getElementById('content-' + id);
+        var button = document.getElementById('button-' + id);
+
+        if (content.style.display === 'none' || content.style.display === '') {
+            content.style.display = 'block';
+            button.innerHTML = 'Tutup';
+        } else {
+            content.style.display = 'none';
+            button.innerHTML = 'Baca Selengkapnya';
+        }
+    }
     </script>
 </head>
 
@@ -86,7 +98,6 @@ require_once 'config/conn.php';
                 </div>
                 <div class='mt-7 flex justify-end mr-7 '>
                     <form action="?action=filter" class="flex items-center" method="post" role="form">
-                    
                     <div class=' w-[200px] h-[60px] flex items-center justify-evenly'>
                         <div class="relative inline-block text-left ml-5 mr-5 lg:ml-96 lg:mr-96 mt-5 mb-5">
                             <button id="dropdown-button" type="button" class="w-[200px] h-[60px] rounded-lg items-center justify-evenly inline-flex    px-4 py-2 text-sm font-medium text-gray-700   border-gray-300   focus:outline-none">
@@ -118,18 +129,26 @@ require_once 'config/conn.php';
                     </form>
                 </div>
                 <?php foreach ($diskusi as $diskusi) : ?>
-                    <a href="index.php?action=diskusi&id=<?= $diskusi['id']; ?>" class='flex justify-center items-center mt-7'>
+                    <a href="index.php?action=diskusi&id=<?= $diskusi['dis_id']; ?>" class='flex justify-center items-center mt-7'>
                         <div class='bg-white w-[900px] rounded-lg'>
                             <div class='header m-5'>
                                 <p class='text-neutral-800 text-xl font-medium'><?= $diskusi['nama'] ?></p>
-                                <p class='text-neutral-800 text-xl font-normal'><?= $diskusi['waktu_pembuatan'] ?></p>
+                                <p class='text-neutral-800 text-xl font-normal'><?= $diskusi['f_nama'] ?> - <?= $diskusi['waktu_pembuatan'] ?>
+                                </p>
                             </div>
                             <div class="isi m-5">
                                 <p class='text-neutral-800 text-xl font-bold'><?= $diskusi['judul'] ?></p>
-                                <p class='text-neutral-800 text-xl font-normal'><?= $diskusi['isi'] ?></p>
+                                <div id="content-<?= $diskusi['dis_id']; ?>">
+                                    <p class='text-neutral-800 text-xl font-normal'>
+                                        <?= strlen($diskusi['isi']) > 200 ? substr($diskusi['isi'], 0, 200) . '...' : $diskusi['isi']; ?>
+                                    </p>
+                                </div>
+                                <?php if (strlen($diskusi['isi']) > 100) : ?>
+                                    <button id="button-<?= $diskusi['dis_id']; ?>" onclick="toggleReadMore(<?= $diskusi['dis_id']; ?>)" class="text-gray-400">Baca Selengkapnya</button>
+                                <?php endif; ?>
                             </div>
                         </div>
-                    </a>
+                    </a> 
                 <?php endforeach; ?>
             </div>
             <div class='kanan'>
