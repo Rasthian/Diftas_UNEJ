@@ -1,0 +1,102 @@
+.profile-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0;
+  margin: 4rem 0 0;
+  /* background-color: #CBC8C2; */
+}
+
+.profile-container .content-profile h1 {
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+.profile-container .content-profile .head .username {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.profile-container .content-profile .middle .content-middle h5 {
+  margin-bottom: 1.4rem;
+  font-weight: bold;
+}
+
+.profile-container
+  .content-profile
+  .middle
+  .content-middle
+  .table-info
+  .left-info
+  div {
+  margin-bottom: 0.8rem;
+}
+
+.profile-container
+  .content-profile
+  .middle
+  .content-middle
+  .table-info
+  .right-info
+  div {
+  margin-bottom: 0.8rem;
+}
+
+.content-profile {
+  width: 70%;
+  padding: 1rem 2rem;
+  background-color: var(--bg-white);
+  display: flex;
+  flex-direction: column;
+  border: 0.2rem solid #619de7;
+  margin: 2rem auto 5rem;
+  gap: 1rem;
+}
+
+.content-profile .head,
+.content-profile .middle,
+.content-profile .bottom {
+  border: 0.1rem solid #619de7;
+  border-radius: 1rem;
+  display: flex;
+  padding: 1rem 2.3rem;
+}
+
+.content-profile .head {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.content-profile .head .btn,
+.content-profile .middle .btn {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  width: 4rem;
+  border-radius: 1rem;
+  border: 0.1rem solid #619de7;
+}
+
+.content-profile .bottom {
+  width: 100%;
+}
+.content-profile .middle .content-middle,
+.content-profile .bottom {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-profile .middle .modal {
+  margin: 1rem auto;
+}
+
+.content-profile .middle .table-info {
+  display: flex;
+  gap: 10rem;
+}
+
+.content-profile .middle {
+  justify-content: space-between;
+}
